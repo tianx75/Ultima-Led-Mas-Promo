@@ -1162,105 +1162,147 @@
         </div>
     </footer>
 
-    <!-- PDF MODAL - Botox + HILEFT szinergia slideshow -->
-    <div class="pdf-modal" id="pdfModal" onclick="if(event.target===this)this.style.display='none'">
-        <div class="pdf-modal-inner" style="max-width:960px;">
-            <div class="pdf-modal-header">
-                <div class="pdf-modal-title">A Tökéletes Szövetség — ULTIMA FACE HILEFT × Botox</div>
-                <div style="display:flex; align-items:center; gap:1rem;">
-                    <span style="font-size:0.75rem; color:var(--text-muted);" id="slideCounter">1 / 12</span>
-                    <button class="pdf-modal-close" onclick="document.getElementById('pdfModal').style.display='none'">&times;</button>
-                </div>
-            </div>
-            <div class="pdf-modal-body" style="overflow:hidden; background:#000; display:flex; align-items:center; justify-content:center;">
-                <div class="modal-slide active" data-slide="1"><img src="images/botox-slide-01.jpg" alt="Slide 1" style="width:100%; display:block;"></div>
-                <div class="modal-slide" data-slide="2"><img src="images/botox-slide-02.jpg" alt="Slide 2" style="width:100%; display:block;"></div>
-                <div class="modal-slide" data-slide="3"><img src="images/botox-slide-03.jpg" alt="Slide 3" style="width:100%; display:block;"></div>
-                <div class="modal-slide" data-slide="4"><img src="images/botox-slide-04.jpg" alt="Slide 4" style="width:100%; display:block;"></div>
-                <div class="modal-slide" data-slide="5"><img src="images/botox-slide-05.jpg" alt="Slide 5" style="width:100%; display:block;"></div>
-                <div class="modal-slide" data-slide="6"><img src="images/botox-slide-06.jpg" alt="Slide 6" style="width:100%; display:block;"></div>
-                <div class="modal-slide" data-slide="7"><img src="images/botox-slide-07.jpg" alt="Slide 7" style="width:100%; display:block;"></div>
-                <div class="modal-slide" data-slide="8"><img src="images/botox-slide-08.jpg" alt="Slide 8" style="width:100%; display:block;"></div>
-                <div class="modal-slide" data-slide="9"><img src="images/botox-slide-09.jpg" alt="Slide 9" style="width:100%; display:block;"></div>
-                <div class="modal-slide" data-slide="10"><img src="images/botox-slide-10.jpg" alt="Slide 10" style="width:100%; display:block;"></div>
-                <div class="modal-slide" data-slide="11"><img src="images/botox-slide-11.jpg" alt="Slide 11" style="width:100%; display:block;"></div>
-                <div class="modal-slide" data-slide="12"><img src="images/botox-slide-12.jpg" alt="Slide 12" style="width:100%; display:block;"></div>
-            </div>
-            <!-- Slide navigation -->
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:1rem 1.5rem; border-top:1px solid var(--border); background:var(--bg-card);">
-                <button onclick="changeSlide(-1)" style="padding:0.5rem 1.5rem; background:none; border:1px solid var(--border); color:var(--text-secondary); cursor:pointer; font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">&larr; Előző</button>
-                <div style="display:flex; gap:0.5rem;" id="slideDots"></div>
-                <button onclick="changeSlide(1)" style="padding:0.5rem 1.5rem; background:none; border:1px solid var(--border); color:var(--text-secondary); cursor:pointer; font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">Következő &rarr;</button>
-            </div>
+    <!-- MODAL SLIDESHOW (a PDF szét van szedve képekre) -->
+  <div class="pdf-modal" id="pdfModal" aria-hidden="true">
+    <div class="pdf-modal-inner">
+      <div class="pdf-modal-header">
+        <div class="pdf-modal-title">ULTIMA LED Mask — prezentáció</div>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <span style="font-size:0.75rem; color:var(--text-muted);" id="slideCounter">1 / 7</span>
+          <button class="pdf-modal-close" id="closeModal" aria-label="Bezárás">&times;</button>
         </div>
+      </div>
+
+      <div class="pdf-modal-body">
+        <div class="modal-slide active" data-slide="1"><img src="images/mask-slide-01.jpg" alt="Slide 1" /></div>
+        <div class="modal-slide" data-slide="2"><img src="images/mask-slide-02.jpg" alt="Slide 2" /></div>
+        <div class="modal-slide" data-slide="3"><img src="images/mask-slide-03.jpg" alt="Slide 3" /></div>
+        <div class="modal-slide" data-slide="4"><img src="images/mask-slide-04.jpg" alt="Slide 4" /></div>
+        <div class="modal-slide" data-slide="5"><img src="images/mask-slide-05.jpg" alt="Slide 5" /></div>
+        <div class="modal-slide" data-slide="6"><img src="images/mask-slide-06.jpg" alt="Slide 6" /></div>
+        <div class="modal-slide" data-slide="7"><img src="images/mask-slide-07.jpg" alt="Slide 7" /></div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:1rem 1.5rem; border-top:1px solid var(--border); background:var(--bg-card);">
+        <button id="prevBtn" style="padding:0.5rem 1.5rem; background:none; border:1px solid var(--border); color:var(--text-secondary); cursor:pointer; font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; transition:all 0.3s;">&larr; Előző</button>
+        <div style="display:flex; gap:0.5rem;" id="slideDots"></div>
+        <button id="nextBtn" style="padding:0.5rem 1.5rem; background:none; border:1px solid var(--border); color:var(--text-secondary); cursor:pointer; font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; transition:all 0.3s;">Következő &rarr;</button>
+      </div>
     </div>
+  </div>
 
-    <script>
-        // Nav scroll
-        const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 60);
-        });
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
 
-        // Fade in on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    // Mobile nav toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
 
-        // Close modal on ESC
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') document.getElementById('pdfModal').style.display = 'none';
-            if (e.key === 'ArrowRight' && document.getElementById('pdfModal').style.display === 'flex') changeSlide(1);
-            if (e.key === 'ArrowLeft' && document.getElementById('pdfModal').style.display === 'flex') changeSlide(-1);
-        });
+    // Close mobile nav after click
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('show'));
+    });
 
-        // Slideshow
-        let currentSlide = 1;
-        const totalSlides = document.querySelectorAll('.modal-slide').length;
+    // Fade in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-        // Build dots
-        const dotsEl = document.getElementById('slideDots');
-        for (let i = 1; i <= totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.style.cssText = 'width:8px;height:8px;border-radius:50%;cursor:pointer;transition:all 0.3s;';
-            dot.dataset.slide = i;
-            dot.onclick = () => goToSlide(i);
-            dotsEl.appendChild(dot);
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Modal open/close
+    const pdfModal = document.getElementById('pdfModal');
+    const openModal = document.getElementById('openModal');
+    const closeModal = document.getElementById('closeModal');
+
+    function showModal() {
+      pdfModal.style.display = 'flex';
+      pdfModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function hideModal() {
+      pdfModal.style.display = 'none';
+      pdfModal.setAttribute('aria-hidden', 'true');
+    }
+
+    openModal.addEventListener('click', showModal);
+    closeModal.addEventListener('click', hideModal);
+
+    // Close modal if clicking backdrop
+    pdfModal.addEventListener('click', (e) => {
+      if (e.target === pdfModal) hideModal();
+    });
+
+    // Slideshow
+    let currentSlide = 1;
+    const slides = Array.from(document.querySelectorAll('.modal-slide'));
+    const totalSlides = slides.length;
+    const dotsEl = document.getElementById('slideDots');
+
+    // Build dots
+    for (let i = 1; i <= totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.style.cssText = 'width:8px;height:8px;border-radius:50%;cursor:pointer;transition:all 0.3s;background:#3a3530;';
+      dot.dataset.slide = i;
+      dot.onclick = () => goToSlide(i);
+      dotsEl.appendChild(dot);
+    }
+
+    function updateDots() {
+      dotsEl.querySelectorAll('div').forEach(d => {
+        d.style.background = parseInt(d.dataset.slide, 10) === currentSlide ? '#c9a96e' : '#3a3530';
+      });
+    }
+
+    function goToSlide(n) {
+      slides.forEach(s => s.classList.remove('active'));
+      const target = slides.find(s => parseInt(s.dataset.slide, 10) === n);
+      if (target) target.classList.add('active');
+      currentSlide = n;
+      document.getElementById('slideCounter').textContent = n + ' / ' + totalSlides;
+      updateDots();
+    }
+
+    function changeSlide(dir) {
+      let next = currentSlide + dir;
+      if (next < 1) next = totalSlides;
+      if (next > totalSlides) next = 1;
+      goToSlide(next);
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => changeSlide(-1));
+    document.getElementById('nextBtn').addEventListener('click', () => changeSlide(1));
+
+    updateDots();
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (pdfModal.style.display === 'flex') {
+        if (e.key === 'Escape') hideModal();
+        if (e.key === 'ArrowRight') changeSlide(1);
+        if (e.key === 'ArrowLeft') changeSlide(-1);
+      }
+    });
+
+    // Smooth scroll (ignore href="#")
+    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-        updateDots();
-
-        function changeSlide(dir) {
-            let next = currentSlide + dir;
-            if (next < 1) next = totalSlides;
-            if (next > totalSlides) next = 1;
-            goToSlide(next);
-        }
-
-        function goToSlide(n) {
-            document.querySelector('.modal-slide.active').classList.remove('active');
-            document.querySelector('[data-slide="' + n + '"]').classList.add('active');
-            currentSlide = n;
-            document.getElementById('slideCounter').textContent = n + ' / ' + totalSlides;
-            updateDots();
-        }
-
-        function updateDots() {
-            dotsEl.querySelectorAll('div').forEach(d => {
-                d.style.background = parseInt(d.dataset.slide) === currentSlide ? '#c9a96e' : '#3a3530';
-            });
-        }
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', e => {
-                e.preventDefault();
-                const target = document.querySelector(a.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-    </script>
+      });
+    });
+  </script>
 </body>
 </html>
